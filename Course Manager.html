@@ -6,17 +6,26 @@
 <title>Course Manager</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f5f7;--sf:#fff;--ink:#1b2430;--mute:#6a7686;--line:#e2e7ed;--ac:#2f6f6a;--acs:#e3f0ee;--danger:#c0473f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+:root{--nw:64px;--mw:1180px;--nh:42px;--bg:#f3f5f7;--sf:#fff;--ink:#1b2430;--mute:#6a7686;--line:#e2e7ed;--ac:#2f6f6a;--acs:#e3f0ee;--danger:#c0473f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161c;--sf:#1a212a;--ink:#e6ebf0;--mute:#8c98a7;--line:#29333f;--ac:#62b5ac;--acs:#1d3331;--danger:#e0736b;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#11161c;--sf:#1a212a;--ink:#e6ebf0;--mute:#8c98a7;--line:#29333f;--ac:#62b5ac;--acs:#1d3331;--danger:#e0736b;color-scheme:dark}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6}
-nav{position:fixed;top:0;bottom:0;left:0;width:64px;background:var(--sf);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 0;padding-top:calc(16px + env(safe-area-inset-top,0px));z-index:5}
-nav a,nav button.ic{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;color:var(--mute);border:0;background:none;cursor:pointer;transition:.15s}
+nav{position:fixed;top:0;bottom:0;left:0;width:var(--nw);background:var(--sf);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;padding-top:calc(14px + env(safe-area-inset-top,0px));z-index:5;overflow-y:auto;scrollbar-width:none}
+nav a,nav button.ic{width:42px;height:var(--nh);display:grid;place-items:center;border-radius:12px;color:var(--mute);border:0;background:none;cursor:pointer;transition:.15s;font:inherit;font-size:14px;text-decoration:none;flex:none}
 nav a:hover,nav button.ic:hover{background:var(--bg);color:var(--ink)}nav a.on{background:var(--acs);color:var(--ac)}
 nav .sp{flex:1}
+.lb,nav kbd{display:none}nav kbd{font:inherit;font-size:11px;color:var(--mute);opacity:.6}
+nav hr{width:24px;margin:6px 0;border:0;border-top:1px solid var(--line);flex:none}
+.brand{display:flex;align-items:center;gap:10px;padding:0 0 8px;flex:none;font-weight:600}
+.mk{width:36px;height:36px;border-radius:10px;background:var(--ac);color:var(--sf);display:grid;place-items:center}
+.nf{--nw:236px;--nh:40px}
+.nf nav{align-items:stretch;padding-inline:12px}
+.nf nav a,.nf nav button.ic{width:auto;display:flex;align-items:center;gap:12px;padding:0 11px;text-align:start}
+.nf .lb,.nf nav kbd{display:block}.nf .lb{flex:1;white-space:nowrap}.nf nav a.on{font-weight:500}
+.nf nav hr{width:auto;margin:6px 8px}.nf .brand{padding-left:3px}
 svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-main{margin-left:64px;padding:32px 40px 60px;max-width:1180px}
+main{margin-left:var(--nw);padding:32px max(40px,calc((100% - var(--nw) - var(--mw))/2)) 60px}
 h1{font-size:24px;margin:0 0 4px;font-weight:600}h2{font-size:15px;margin:0 0 12px;font-weight:600}
 .sub{color:var(--mute);margin:0 0 24px}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}.bar h1{margin:0}
@@ -52,7 +61,16 @@ input:focus,select:focus,textarea:focus,.btn:focus-visible,a:focus-visible{outli
 input[type=range]{padding:0;accent-color:var(--ac)}input[type=checkbox]{width:auto;accent-color:var(--ac)}
 .sw{display:flex;gap:8px;flex-wrap:wrap}.sw button{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer}.sw button.on{border-color:var(--ink)}
 .done{text-decoration:line-through;color:var(--mute)}
-@media(max-width:860px){main{margin:0;padding:20px 16px 90px}nav{top:auto;left:0;right:0;bottom:0;width:auto;height:58px;flex-direction:row;justify-content:space-around;padding:0 8px calc(env(safe-area-inset-bottom,0px));border:0;border-top:1px solid var(--line)}nav .sp{display:none}nav a,nav button.ic{width:34px;height:40px}.dash>.card{grid-column:1/-1!important}.week{grid-template-columns:1fr}.cell{min-height:60px}}
+.ic:focus-visible{outline:2px solid var(--ac);outline-offset:-2px}
+.split>.day{margin-top:18px}
+@media(min-width:1500px){:root{--mw:1320px}}
+@media(min-width:1800px){:root{--mw:1480px}}
+@media(min-width:2300px){:root{--mw:1760px}}
+@media(min-width:861px){.cell{min-height:clamp(84px,calc((100vh - 290px)/6),150px)}.week .card{min-height:clamp(130px,30vh,340px)}}
+@media(min-width:861px) and (max-width:1199px){.week{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1400px){.split{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}.split>.day{margin-top:0;position:sticky;top:24px}}
+@media(min-width:861px) and (max-height:760px){:root,:root.nf{--nh:36px}nav{padding-top:calc(10px + env(safe-area-inset-top,0px));gap:2px}main{padding-top:24px}}
+@media(max-width:860px){main{margin:0;padding:20px 16px 90px}nav{top:auto;left:0;right:0;bottom:0;width:auto;height:58px;flex-direction:row;justify-content:space-around;padding:0 8px calc(env(safe-area-inset-bottom,0px));border:0;border-top:1px solid var(--line)}nav .sp,nav .brand,nav hr{display:none}nav a,nav button.ic{width:34px;height:40px}.dash>.card{grid-column:1/-1!important}.week{grid-template-columns:1fr}.cell{min-height:60px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -76,7 +94,7 @@ notes:'<path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9z"/><pa
 progress:'<path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/>',
 plus:'<path d="M12 5v14M5 12h14"/>',trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/>',
 edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
-moon:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',moon:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
 chev:'<path d="m9 6 6 6-6 6"/>',chevl:'<path d="m15 6-6 6 6 6"/>'};
 const ic=n=>`<svg class="i" viewBox="0 0 24 24">${IC[n]}</svg>`;
 const NAV=[['dash','Dashboard'],['courses','Courses'],['schedule','Schedule'],['tasks','Projects & exams'],['calendar','Calendar'],['cards','Flashcards'],['study','Study tracker'],['notes','Sticky notes'],['progress','Progress']];
@@ -190,8 +208,8 @@ calendar(){
  for(let i=0;i<n;i++){const s=addDays(f,i),e=evs(s);cells+=`<button class="cell ${s===today()?'today':''} ${s===sel?'sel':''}" onclick="pages._cs='${s}';go()"><b>${i+1}</b>${e.slice(0,2).map(x=>`<div class="ev" style="background:${x.c}">${esc(x.t)}</div>`).join('')}${e.length>2?`<div class="mute" style="font-size:11px">+${e.length-2} more</div>`:''}</button>`}
  const se=evs(sel).sort((a,b)=>(a.tm||'').localeCompare(b.tm||''));
  return head(new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(cur),`<label style="display:inline-flex;gap:6px;margin:0 12px"><input type="checkbox" ${sd?'checked':''} onchange="pages._cst=this.checked;go()">Study sessions</label><button class="ib" aria-label="Previous month" onclick="pages._cc=new Date(${y},${m-1},1,12);go()">${ic('chevl')}</button><button class="btn s" onclick="pages._cc=null;pages._cs=null;go()">Today</button><button class="ib" aria-label="Next month" onclick="pages._cc=new Date(${y},${m+1},1,12);go()">${ic('chev')}</button>`)+
- `<div class="cal">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="h">${d}</div>`).join('')}${cells}</div>
- <div class="card" style="margin-top:18px"><h2>${jf(sel,{weekday:'long',month:'long',day:'numeric'})}</h2>${se.length?se.map(x=>`<div class="row"><i class="dot" style="background:${x.c}"></i><div class="grow">${esc(x.t)}</div><span class="mute">${x.k}${x.tm?' · '+x.tm:''}</span></div>`).join(''):empty('Nothing scheduled.')}</div>`},
+ `<div class="split"><div class="cal">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="h">${d}</div>`).join('')}${cells}</div>
+ <div class="card day"><h2>${jf(sel,{weekday:'long',month:'long',day:'numeric'})}</h2>${se.length?se.map(x=>`<div class="row"><i class="dot" style="background:${x.c}"></i><div class="grow">${esc(x.t)}</div><span class="mute">${x.k}${x.tm?' · '+x.tm:''}</span></div>`).join(''):empty('Nothing scheduled.')}</div></div>`},
 study(){
  const t=today(),tot=sumStudy(()=>1),mx=Math.max(1,...S.courses.map(c=>sumStudy(x=>x.cid===c.id)));
  return head('Study tracker',addB("openForm('study')",'Log study time'))+`<div class="grid" style="margin-bottom:16px"><div class="card stat"><b>${dur(sumStudy(x=>x.date>=wkStart()&&x.date<=t))}</b><span class="mute">This week</span></div><div class="card stat"><b>${dur(tot)}</b><span class="mute">All time</span></div></div>
@@ -226,15 +244,28 @@ function review(){
 addEventListener('keydown',e=>{const r=pages._rv;if(!r||document.getElementById('ov')||location.hash!=='#cards')return;if(e.key===' '&&!r.show){e.preventDefault();r.show=true;go()}else if(r.show&&'1234'.includes(e.key)&&e.key)rate(['again','hard','good','easy']['1234'.indexOf(e.key)])});
 
 /* ---------- shell ---------- */
-function go(){
- const p=(location.hash.slice(1)in pages)?location.hash.slice(1):'dash';
- document.getElementById('nav').innerHTML=NAV.map(([k,l])=>`<a href="#${k}" class="${k===p?'on':''}" title="${l}" aria-label="${l}">${ic(k)}</a>`).join('')+`<span class="sp"></span><button class="ic" title="Toggle dark mode" aria-label="Toggle dark mode" onclick="toggleTheme()">${ic('moon')}</button>`;
- document.getElementById('main').innerHTML=pages[p]();
-}
-function toggleTheme(){const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';try{localStorage.setItem(K+'-t',r.dataset.theme)}catch(e){}}
+const curPage=()=>{const h=location.hash.slice(1);return typeof pages[h]==='function'?h:'dash'};
+const isDark=()=>{const r=document.documentElement;return r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches)};
+let navPref;try{navPref=localStorage.getItem(K+'-nav')}catch(e){}
+let wide=innerWidth>=1100;
+const navFull=()=>innerWidth>=1100&&navPref!=='mini';
+const applyNav=()=>document.documentElement.classList.toggle('nf',navFull());
+function setActive(p){document.querySelectorAll('#nav a').forEach(a=>{const on=a.getAttribute('href')==='#'+p;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')})}
+function renderNav(){
+ const full=navFull(),dk=isDark();
+ document.getElementById('nav').innerHTML=`<div class="brand"><span class="mk">${ic('courses')}</span><span class="lb">Course Manager</span></div>`+
+ NAV.map(([k,l],i)=>(k==='courses'||k==='cards'?'<hr>':'')+`<a href="#${k}" title="${full?'':l+' ('+(i+1)+')'}" aria-label="${l}">${ic(k)}<span class="lb">${l}</span><kbd>${i+1}</kbd></a>`).join('')+
+ `<span class="sp"></span><button class="ic th" title="${full?'':'Toggle dark mode'}" aria-label="Toggle dark mode" onclick="toggleTheme()">${ic(dk?'sun':'moon')}<span class="lb">${dk?'Light mode':'Dark mode'}</span></button>`+
+ (innerWidth>=1100?`<button class="ic cl" title="${full?'':'Expand menu'}" aria-label="${full?'Collapse menu':'Expand menu'}" onclick="toggleNav()">${ic(full?'chevl':'chev')}<span class="lb">Collapse menu</span></button>`:'');
+ setActive(curPage())}
+function toggleNav(){navPref=navFull()?'mini':'full';try{localStorage.setItem(K+'-nav',navPref)}catch(e){}applyNav();renderNav();document.querySelector('#nav .cl')?.focus()}
+function go(){const p=curPage();setActive(p);document.getElementById('main').innerHTML=pages[p]()}
+function toggleTheme(){const r=document.documentElement;r.dataset.theme=isDark()?'light':'dark';try{localStorage.setItem(K+'-t',r.dataset.theme)}catch(e){}renderNav();document.querySelector('#nav .th')?.focus()}
 try{const t=localStorage.getItem(K+'-t');if(t)document.documentElement.dataset.theme=t}catch(e){}
 addEventListener('hashchange',()=>{if(location.hash!=='#cards'){pages._rv=null;pages._dv=null}go()});
-go();
+addEventListener('resize',()=>{const w=innerWidth>=1100;if(w!==wide){wide=w;applyNav();renderNav()}});
+addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||pages._rv||document.getElementById('ov')||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||!/^[1-9]$/.test(e.key))return;const n=NAV[+e.key-1];if(n)location.hash=n[0]});
+applyNav();renderNav();go();
 </script>
 </body>
 </html>
